@@ -20,6 +20,7 @@ export default function App() {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold text-orange-500 mb-4">Cubic Solver</h1>
       <CubicInput
         {...{
           a,
@@ -40,7 +41,7 @@ export default function App() {
       />
       <CubicEquation a={a} b={b} c={c} d={d} />
       <CubicTable p={p} q={q} discrim={discrim} roots={roots} />
-      <CubicGraph a={a} b={b} c={c} d={d} />
+      <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       <CubicHistory
         history={history}
         setA={setA}

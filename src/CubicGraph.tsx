@@ -1,40 +1,77 @@
 import { useEffect, useRef } from "react";
 
-type Props = { a: number; b: number; c: number; d: number };
-export default function CubicGraph({ a, b, c, d }: Props) {
+type Props = { a: number; b: number; c: number; d: number; roots:(number|string)[] };
+export default function CubicGraph({ a, b, c, d, roots }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  useEffect(() => {
+  useEffect(()=>{
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if(!canvas) return;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if(!ctx) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // draw axes
-    ctx.strokeStyle = "black";
+    // Draw axes
     ctx.beginPath();
-    ctx.moveTo(0, 150);
-    ctx.lineTo(300, 150);
-    ctx.moveTo(150, 0);
-    ctx.lineTo(150, 300);
-    ctx.stroke();
+    ctx.moveTo(300, 0);
+    ctx.lineTo(300, 400);
+    ctx.strokeStyle = "grey";
+    ctx.stroke(); //yummy yummy y-axis
 
-    // plot cubic
-    ctx.strokeStyle = "red";
     ctx.beginPath();
-    for (let x = -150; x <= 150; x++) {
-      const y =
-        a * Math.pow(x / 10, 3) + b * Math.pow(x / 10, 2) + c * (x / 10) + d;
-      const canvasY = 150 - y * 10;
-      if (x === -150) ctx.moveTo(x + 150, canvasY);
-      else ctx.lineTo(x + 150, canvasY);
+    ctx.moveTo(0, 200);
+    ctx.lineTo(600, 200);
+    ctx.strokeStyle = "grey";
+    ctx.stroke(); //can't think of a positive adj. starting with x... </3
+
+    for (let vertCount = 0; vertCount <= 600; vertCount += 20) {
+        ctx.beginPath();
+        ctx.moveTo(vertCount, 0);
+        ctx.lineTo(vertCount, 400);
+        ctx.strokeStyle = "silver";
+        ctx.stroke();
     }
-    ctx.stroke();
-  }, [a, b, c, d]);
 
-  return (
-    <canvas ref={canvasRef} width={300} height={300} className="border my-2" />
-  );
+    for (let horCount = 0; horCount <= 400; horCount += 20) {
+        ctx.beginPath();
+        ctx.moveTo(0, horCount);
+        ctx.lineTo(600, horCount);
+        ctx.strokeStyle = "silver";
+        ctx.stroke();
+    }
+
+    // idk why i have to declare 'let x' in a for loop all of a sudden.
+    let start = true;
+    ctx.beginPath();
+    for (let x = -15; x <= 15; x += 0.01) {
+        let y = a * x * x * x + b * x * x + c * x + d;
+
+        let cx = x*20 + 300;
+        let cy = 200 - y*20;
+
+        if (start) {
+            ctx.moveTo(cx, cy);
+            start = false;
+        } else {
+            ctx.lineTo(cx, cy);
+        }
+    }
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+
+    ctx.fillStyle = "blue";
+    roots.forEach(root=>{
+      if(typeof root === "number"){
+        ctx.beginPath();
+        ctx.arc(root * 20 + 300, 200, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.stroke();
+      }
+    });
+
+  },[a,b,c,d,roots]);
+
+  return <canvas ref={canvasRef} width={600} height={400} className="border my-2"/>
 }

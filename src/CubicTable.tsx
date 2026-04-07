@@ -4,9 +4,10 @@ type Props = {
   discrim: number;
   roots: (number | string)[];
 };
+
 export default function CubicTable({ p, q, discrim, roots }: Props) {
   return (
-    <table className="border-collapse border border-gray-400 w-full my-2">
+    <table className="border-collapse w-full my-2">
       <tbody>
         <tr>
           <th className="border px-2">p</th>
@@ -20,17 +21,25 @@ export default function CubicTable({ p, q, discrim, roots }: Props) {
           <th className="border px-2">Discriminant</th>
           <td className="border px-2">{discrim}</td>
         </tr>
+        <tr style={{backgroundColor: "#f57c00"}}>
+          <th>Value</th>
+          <th>X</th>
+          <th>Y</th>
+        </tr>
         <tr>
           <th className="border px-2">Root 1</th>
           <td className="border px-2">{roots[0]}</td>
+          <td>0</td>
         </tr>
         <tr>
           <th className="border px-2">Root 2</th>
           <td className="border px-2">{roots[1]}</td>
+          <td>0</td>
         </tr>
         <tr>
           <th className="border px-2">Root 3</th>
           <td className="border px-2">{roots[2]}</td>
+          <td>0</td>
         </tr>
       </tbody>
     </table>
