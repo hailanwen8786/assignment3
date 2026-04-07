@@ -21,7 +21,7 @@ export default function CubicTable({ p, q, discrim, roots }: Props) {
           <th className="border px-2">Discriminant</th>
           <td className="border px-2">{discrim}</td>
         </tr>
-        <tr style={{backgroundColor: "#f57c00"}}>
+        <tr style={{backgroundColor: "orange"}}>
           <th>Value</th>
           <th>X</th>
           <th>Y</th>

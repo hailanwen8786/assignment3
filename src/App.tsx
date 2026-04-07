@@ -6,7 +6,7 @@ import CubicGraph from "./CubicGraph";
 import CubicHistory from "./CubicHistory";
 
 export default function App() {
-  const [a, setA] = useState(1);
+  const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
@@ -18,9 +18,9 @@ export default function App() {
     { a: number; b: number; c: number; d: number }[]
   >([]);
 
-  return (
+  return ( //TAILWIND COLOURS NOT WORKING </3
     <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-orange-500 mb-4">Cubic Solver</h1>
+      <h1 className="text-2xl font-bold mb-4" style={{color: "orange"}}>Cubic Solver</h1> 
       <CubicInput
         {...{
           a,

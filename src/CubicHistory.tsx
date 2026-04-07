@@ -15,7 +15,7 @@ export default function CubicHistory({
   return (
     <table className="border-collapse border border-gray-400 w-full my-2">
       <thead>
-        <tr>
+        <tr style={{backgroundColor: "orange"}}>
           <th className="border px-2">#</th>
           <th className="border px-2">a</th>
           <th className="border px-2">b</th>

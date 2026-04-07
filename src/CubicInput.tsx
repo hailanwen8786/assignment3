@@ -82,7 +82,8 @@ export default function CubicInput({
       />
       <button
         type="submit"
-        className="mt-2 p-2 bg-blue-600 text-white rounded hover:bg-blue-500"
+        className="mt-2 p-2 text-white rounded"
+        style ={{backgroundColor: "orange"}}
       >
         Save
       </button>
