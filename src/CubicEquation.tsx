@@ -2,7 +2,7 @@ type CubicEquationProps ={
     coeffs: {a: number; b: number; c: number; d: number};
 };
 
-export const cubicEquation = ({coeffs}: CubicEquationProps) => {
+export const CubicEquation = ({coeffs}: CubicEquationProps) => {
     const {a, b, c, d} = coeffs;
     return (
         <div className="text-lg mt-4">

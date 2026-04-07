@@ -35,7 +35,7 @@ function drawBase(ctx: CanvasRenderingContext2D) {
 
 }
 
-export function drawRoots(x: number, ctx: CanvasRenderingContext2D) {
+export function DrawRoots(x: number, ctx: CanvasRenderingContext2D) {
     if (!isNaN(x)) {
         ctx.beginPath();
         ctx.arc(x, 200, 5, 0, 2 * Math.PI);
@@ -61,7 +61,7 @@ function drawLine(ctx: CanvasRenderingContext2D) {
     ctx.stroke();
 }
 
-export function drawGraph({ coeffs }: GraphProps) {
+export function DrawGraph({ coeffs }: GraphProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
 

@@ -1,5 +1,13 @@
 import { useState, useRef } from "react";
 
+type CubicInputProps = {
+  coeffs: { a: number; b: number; c: number; d: number };
+  setA: (val: number) => void;
+  setB: (val: number) => void;
+  setC: (val: number) => void;
+  setD: (val: number) => void;
+};
+
 function cbrt(x: number) {
   if (x < 0) {
     return -Math.pow(-x, 1 / 3);
@@ -8,11 +16,8 @@ function cbrt(x: number) {
   }
 }
 
-export const solveCubic = () => {
-  const [a, setA] = useState<number>(0);
-  const [b, setB] = useState<number>(0);
-  const [c, setC] = useState<number>(0);
-  const [d, setD] = useState<number>(0);
+export function SolveCubic({ coeffs, setA, setB, setC, setD }: CubicInputProps) {
+  const { a, b, c, d } = coeffs;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -94,19 +99,19 @@ export const solveCubic = () => {
         ></input>
 
         <label className="font-semibold text-gray-700 text-sm">Result:</label>
-          <input
-            ref={inputRef}
-            type="text"
-            readOnly
-            className="p-2.5 rounded-lg bg-gray-100 font-semibold text-base"
-          />
+        <input
+          ref={inputRef}
+          type="text"
+          readOnly
+          className="p-2.5 rounded-lg bg-gray-100 font-semibold text-base"
+        />
 
-          <input
-            type="submit"
-            value="Save"
-            className="mt-2 p-3 rounded-xl bg-[#667eea] text-white font-semibold text-base cursor-pointer transition-all duration-200 hover:bg-[#5a67d8] active:translate-y-0 hover:-translate-y-1"
-          />
+        <input
+          type="submit"
+          value="Save"
+          className="mt-2 p-3 rounded-xl bg-[#667eea] text-white font-semibold text-base cursor-pointer transition-all duration-200 hover:bg-[#5a67d8] active:translate-y-0 hover:-translate-y-1"
+        />
       </form>
     </div>
   );
-};
+}
