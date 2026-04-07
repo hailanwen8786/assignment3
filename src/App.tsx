@@ -1,31 +1,53 @@
 import { useState } from "react";
-import { SolveCubic } from "./CubicInput";
-import { CubicEquation } from "./CubicEquation";
-import { CubicTable } from "./CubicTable";
-import { DrawGraph } from "./CubicGraph";
-import { DrawRoots } from "./CubicGraph";
-import { CubicHistory } from "./CubicHistory";
+import CubicInput from "./CubicInput";
+import CubicEquation from "./CubicEquation";
+import CubicTable from "./CubicTable";
+import CubicGraph from "./CubicGraph";
+import CubicHistory from "./CubicHistory";
 
-export function App() {
-  const [coeffs, setCoeffs] = useState({ a: 0, b: 0, c: 0, d: 0 });
-  const [history, setHistory] = useState<(typeof coeffs)[]>([]);
-
-  const handleSubmit = (newCoeffs: typeof coeffs) => {
-    setCoeffs(newCoeffs);
-    setHistory((prev) => [newCoeffs, ...prev]);
-  };
-
-  const handleSelect = (selectedCoeffs: typeof coeffs) => {
-    setCoeffs(selectedCoeffs);
-  };
+export default function App() {
+  const [a, setA] = useState(1);
+  const [b, setB] = useState(0);
+  const [c, setC] = useState(0);
+  const [d, setD] = useState(0);
+  const [p, setP] = useState(0);
+  const [q, setQ] = useState(0);
+  const [discrim, setDiscrim] = useState(0);
+  const [roots, setRoots] = useState<(number | string)[]>([]);
+  const [history, setHistory] = useState<
+    { a: number; b: number; c: number; d: number }[]
+  >([]);
 
   return (
-    <div>
-      <SolveCubic />
-      <CubicEquation coeffs={coeffs} />
-      <CubicTable coeffs={coeffs} />
-      <DrawGraph coeffs={coeffs} />
-      <CubicHistory history={history} onSelect={handleSelect} />
+    <div className="p-4 max-w-2xl mx-auto">
+      <CubicInput
+        {...{
+          a,
+          b,
+          c,
+          d,
+          setA,
+          setB,
+          setC,
+          setD,
+          setP,
+          setQ,
+          setDiscrim,
+          setRoots,
+          history,
+          setHistory,
+        }}
+      />
+      <CubicEquation a={a} b={b} c={c} d={d} />
+      <CubicTable p={p} q={q} discrim={discrim} roots={roots} />
+      <CubicGraph a={a} b={b} c={c} d={d} />
+      <CubicHistory
+        history={history}
+        setA={setA}
+        setB={setB}
+        setC={setC}
+        setD={setD}
+      />
     </div>
   );
 }

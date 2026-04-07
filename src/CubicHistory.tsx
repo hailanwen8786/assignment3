@@ -1,36 +1,48 @@
-type CubicHistoryProps = {
+type Props = {
   history: { a: number; b: number; c: number; d: number }[];
-  onSelect: (coeffs: { a: number; b: number; c: number; d: number }) => void;
+  setA: (v: number) => void;
+  setB: (v: number) => void;
+  setC: (v: number) => void;
+  setD: (v: number) => void;
 };
-
-export function CubicHistory({ history, onSelect }: CubicHistoryProps) {
+export default function CubicHistory({
+  history,
+  setA,
+  setB,
+  setC,
+  setD,
+}: Props) {
   return (
-    <div className="mt-4">
-      <h2 className="font-bold">History</h2>
-      <table className="border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="border p-1">a</th>
-            <th className="border p-1">b</th>
-            <th className="border p-1">c</th>
-            <th className="border p-1">d</th>
+    <table className="border-collapse border border-gray-400 w-full my-2">
+      <thead>
+        <tr>
+          <th className="border px-2">#</th>
+          <th className="border px-2">a</th>
+          <th className="border px-2">b</th>
+          <th className="border px-2">c</th>
+          <th className="border px-2">d</th>
+        </tr>
+      </thead>
+      <tbody>
+        {history.map((h, i) => (
+          <tr
+            key={i}
+            className="cursor-pointer hover:bg-gray-200"
+            onClick={() => {
+              setA(h.a);
+              setB(h.b);
+              setC(h.c);
+              setD(h.d);
+            }}
+          >
+            <td className="border px-2">{i + 1}</td>
+            <td className="border px-2">{h.a}</td>
+            <td className="border px-2">{h.b}</td>
+            <td className="border px-2">{h.c}</td>
+            <td className="border px-2">{h.d}</td>
           </tr>
-        </thead>
-        <tbody>
-            {history.map((row, idx) => (
-                <tr
-                    key={idx}
-                    onClick={() => onSelect(row)}
-                    className="cursor-pointer hover:bg-gray-200"
-                >
-                    <td className="border p-1">{row.a}</td>
-                    <td className="border p-1">{row.b}</td>
-                    <td className="border p-1">{row.c}</td>
-                    <td className="border p-1">{row.d}</td>
-                </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 }
